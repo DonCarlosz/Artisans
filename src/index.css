@@ -1,28 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 @import "tailwindcss";
-
-html, body {
-  max-width: 1440px;
-  margin: 0 auto;
-  overflow-x: hidden; /* prevents horizontal scroll */
-}
-
 html {
-  scroll-behavior: smooth; /* optional: useful if you have a fixed/sticky header */
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* optional: useful if you have a fixed/sticky header */
 }
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.scrollbar-hidden {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
 @keyframes fade-in {
   from {
     opacity: 0; /* Start slightly lower */
@@ -40,20 +20,7 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
-  
 }
-@keyframes fade-in-down {
-  from {
-    opacity: 0;
-    transform: translateY(-20px); /* Start slightly lower */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-}
-
 @keyframes fade-in-right {
   from {
     opacity: 0;
@@ -62,16 +29,6 @@ html {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-@keyframes fade-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(30px); /* start off to the right */
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0); /* end at normal position */
   }
 }
 
@@ -115,13 +72,6 @@ html {
        animation: fade-in-right 1s ease-in-out forwards;
 
   }
-  .fade-in-left {
-  animation: fade-in-left 1s ease-in-out forwards;
-}
-  .fade-in-down {
-  animation: fade-in-down 1s ease-in-out forwards;
-}
-
 
 }
 
@@ -131,17 +81,20 @@ html {
     --color-primary: var(--primary) ;
     --color-neutral: var(--neutral);
     --color-secondary: var(--secondary);
-
+    --color-background: var(--background); 
+    --color-white: var(--white);
+    --color-black: var(--black);
     --breakpoint-xx: 1200px;
 }
 
 @layer base {
     :root{
-        --secondary: #fff;
-        --neutral: #b1b0b0;
-        --primary: #000;
-        font-family: 'Poppins', ui-sans-serif, system-ui;
-        
+        --black: #000000;
+        --neutral: #939191;
+        --secondary: #2959F7;
+        --primary: #062793;
+        --background: #fff1f2;
+        --white: #ffffff;
     }
     .dark{
            --neutral: #f3161600;
@@ -149,23 +102,24 @@ html {
   
 
     }
-
-
-
+    
     h1 {
-        @apply text-4xl font-bold
+        @apply text-5xl font-bold
     }
     h2{
-        @apply text-3xl font-semibold
+        @apply text-4xl font-semibold
     }
     h3{
-        @apply text-2xl font-medium
+        @apply text-3xl font-medium
     }
     h4{
+        @apply text-2xl font-semibold
+    }
+    h5{
         @apply text-xl font-semibold
     }
     button{
-        @apply bg-primary py-2 px-5 rounded-xl text-[18px]
+        @apply  py-2 px-5 border-1 rounded-3xl hover:border-primary transition
     }
     
 }

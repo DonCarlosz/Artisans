@@ -1,22 +1,13 @@
-import profile from "./profile.jpg";
-import figma from "./Figma.svg";
-import react from "./React.svg";
-import nodejs from "./Node.js.svg";
-import tailwind from './Tailwind.svg'
-import mongodb from './MongoDB.svg'
-import express from './Express.svg'
-import vite from './vite.svg'
-
-
+import logo from './logo.svg';
+import logo2 from './logo2.svg';
+import SignImage from './Image.svg';
+import logo3 from './logo3.svg';
+import login from './Image2.svg';
 
 export const asset = {
-    profile,
-    figma,
-    react,
-    nodejs,
-    tailwind,
-    mongodb,
-    express,
-    vite
-
+    logo,
+    logo2,
+    logo3,
+    SignImage,
+    login
 }

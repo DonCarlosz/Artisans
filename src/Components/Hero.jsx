@@ -1,56 +1,45 @@
-import React from "react";
-import { asset } from "../Images/asset";
-import { ArrowDown } from "lucide-react";
+import { StarIcon } from 'lucide-react'
+import React from 'react'
+import { useAuth } from '../contexts/AuthContext' // import your auth context
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
-  const scrollToSkills = () => {
-    const skillsSection = document.getElementById("skills");
-    if (skillsSection) {
-      skillsSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const navigate = useNavigate()
+  const { user } = useAuth()
+
+  // Get first name from displayName (assuming Firebase user has it)
+  const firstName = user?.displayName ? user.displayName.split(' ')[0] : 'User'
 
   return (
-    <section>
-      <div className="text-gray-400 flex flex-col md:flex-row items-center justify-between gap-10 lg:gap-10 lg:h-screen pt-40 lg:pt-0">
-        
-        {/* Text Section */}
-        <div className="flex-1 text-center md:text-left max-w-lg">
-          <h2 className="text-2xl lg:text-4xl font-bold text-white mb-10 relative group w-full flex justify-center md:justify-start fade-in-down">
-            <span className="inline-block relative">
-              About Me
-              <span className="block h-1 bg-indigo-500 w-full mt-2 mx-auto scale-x-50 origin-center transition-transform duration-500 group-hover:scale-x-100"></span>
-            </span>
-          </h2>
-
-          <p className="my-8 text-base lg:text-lg leading-relaxed fade-in-right">
-            I'm a web development enthusiast focused on building responsive
-            applications with React, Tailwind CSS, Node.js, Express, and
-            MongoDB. I also explore UI/UX design with Figma and enjoy learning
-            how Web3 can shape the future of the web.
-          </p>
-
-          {/* Button scrolls to Skills section */}
-          <button
-            onClick={scrollToSkills}
-            className="backdrop-blur-2xl bg-inherit text-indigo-500 font-medium px-4 py-2 rounded-xl flex items-center gap-2 mx-auto md:mx-0 border border-neutral-800 hover:border-indigo-600 transition fade-in-up text-base lg:text-lg"
-          >
-            Let's get started
-            <ArrowDown />
-          </button>
-        </div>
-
-        {/* Image Section (hidden on small screens) */}
-        <div className="hidden md:block relative overflow-hidden rounded-2xl flex-shrink-0 w-[250px] lg:w-[350px] md:w-[290px]">
-          <img
-            src={asset.profile}
-            alt="profile"
-            className="rounded-2xl w-full h-auto object-cover mix-blend-screen fade-in-left"
-          />
-        </div>
+    <div className="flex flex-col items-center  pt-25 space-y-8">
+      {/* Top Section */}
+      <div className="text-center max-w-xl space-y-4">
+        <p className="text-primary gap-2 items-center flex justify-center">
+          <StarIcon className='size-4'/> Welcome Back
+        </p>
+        <h3 className='font-bold text-2xl md:text-3xl lg:text-4xl tracking-tighter'>
+          Hi {firstName}, what do you need help with today?
+        </h3>
+        <p className="text-gray-600">
+          Connect with skilled artisans in your area. From home repairs to personal services, we&apos;ve got you covered.
+        </p>
+        <button onClick={()=>{navigate('/artisans')}} className="text-sm rounded-xl px-10 bg-secondary shadow text-white hover:bg-blue-700 transition">
+          Find Artisans Near You
+        </button>
       </div>
-    </section>
-  );
-};
 
-export default Hero;
+      {/* Verified Solar Section */}
+      <div className="w-full flex flex-col items-center bg-gradient-to-r from-primary to-secondary text-white p-6 rounded-xl shadow-lg">
+        <button className="text-sm font-semibold uppercase bg-secondary border-0">New</button>
+        <h3 className="text-xl font-bold mt-2">
+          Verified Solar Installers in Lagos!
+        </h3>
+        <p className="mt-2 text-sm">
+          Get clean, renewable energy solutions from certified professionals.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+export default Hero

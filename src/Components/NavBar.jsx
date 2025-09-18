@@ -1,79 +1,67 @@
 import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { asset } from "../Images/asset";
+import { useAuth } from "../contexts/AuthContext"; // ✅ import Auth context
 
-const navContents = [
-  { name: "Skills", href: "#skills" },
-  { name: "Services", href: "#services" },
-  { name: "Contact", href: "#contact" },
-];
+const navContents = [{ label: "Contact", path: "/contact" }];
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user } = useAuth(); // ✅ get current user
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    if (user) {
+      navigate("/dashboard"); // go to dashboard if logged in
+    } else {
+      navigate("/signup"); // fallback
+    }
+  };
 
   return (
-    <section className="fixed  top-4 left-0 right-0 z-40 max-w-[1440px] mx-auto">
-      {/* Container */}
-      <div className="py-3 px-6 md:px-12 bg-black/20 fade-in-down rounded-3xl backdrop-blur-2xl border border-neutral-800 mx-4 md:mx-10 lg:mx-20 ">
+    <section className="fixed top-0 left-0 right-0 z-40 overflow-hidden">
+      <div className="padding py-3 bg-black/20">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div>
-            <a href="#">
-             <img src={asset.vite} alt="" srcset="" />
-            </a>
+          <NavLink to="/" className="flex items-center gap-1.5">
+            <img src={asset.logo} alt="" className="h-9" />
+            <img src={asset.logo2} alt="" className="h-11 hidden md:block" />
+          </NavLink>
+
+          {/* Search */}
+          <div className="border-1 hidden border-neutral-400 md:flex gap-2 py-2 px-2 items-center rounded-xl">
+            <Search className="size-5" />
+            <input
+              type="text"
+              className="outline-none w-80 rounde"
+              placeholder="Search for Plumber, Tailor, Makeup..."
+            />
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-15">
-            {navContents.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                className="relative group text-neutral-200 text-sm sm:text-base md:text-lg font-medium hover:text-white transition"
+          <nav className="flex items-center">
+            {user ? (
+              <img
+                src={user.photoURL || asset.SignImage} // fallback image if no photo
+                alt="Profile"
+                className="h-10 w-10 rounded-full cursor-pointer border-2 border-primary"
+                onClick={handleProfileClick}
+              />
+            ) : (
+              <button
+                onClick={() => navigate("/signup")}
+                className="bg-primary text-white"
               >
-                <div className="flex items-center gap-1.5">{item.name}</div>
-                {/* Underline expands from center on hover */}
-                <span className="block h-0.5 bg-indigo-500 w-0 mx-auto mt-1 transition-all duration-500 group-hover:w-full"></span>
-              </a>
-            ))}
-          </div>
+                Join Us
+              </button>
+            )}
+          </nav>
 
-          {/* Hamburger Icon (Mobile Only) */}
-          <div className="lg:hidden">
-            <div onClick={() => setMenuOpen(true)} className="text-neutral-200">
-              <Menu size={28} />
-            </div>
-          </div>
+          
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`fixed min-h-screen inset-0 bg-black/30 backdrop-blur-2xl z-50
-          flex flex-col items-center justify-center gap-8
-          transform transition-transform duration-500
-          ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
-      >
-        {/* Close Button */}
-        <div
-          onClick={() => setMenuOpen(false)}
-          className="absolute top-6 right-6 text-neutral-200 hover:text-white"
-        >
-          <X size={32} />
-        </div>
-
-        {/* Mobile Links */}
-        {navContents.map((item, key) => (
-          <a
-            key={key}
-            href={item.href}
-            className="text-lg sm:text-lg md:text-lg text-neutral-200 hover:text-white transition"
-            onClick={() => setMenuOpen(false)}
-          >
-            {item.name}
-          </a>
-        ))}
-      </div>
     </section>
   );
 };
