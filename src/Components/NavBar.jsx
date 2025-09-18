@@ -4,10 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { asset } from "../Images/asset";
 import { useAuth } from "../contexts/AuthContext"; // ✅ import Auth context
 
-const navContents = [{ label: "Contact", path: "/contact" }];
 
 const NavBar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const { user } = useAuth(); // ✅ get current user
   const navigate = useNavigate();
 
