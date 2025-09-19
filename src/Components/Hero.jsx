@@ -3,7 +3,7 @@ import React from 'react'
 import { useAuth } from '../contexts/AuthContext' // import your auth context
 import { useNavigate } from 'react-router-dom'
 
-const Hero = () => {
+const HeroI = () => {
   const navigate = useNavigate()
   const { user } = useAuth()
 
@@ -42,4 +42,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default HeroI
