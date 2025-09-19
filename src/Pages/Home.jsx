@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
 import HeroI from "../components/Hero";
 
+
 const Home = () => {
   return (
     <div>
