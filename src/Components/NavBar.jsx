@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Menu, Search, X } from "lucide-react";
+import { Search} from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { asset } from "../Images/asset";
 import { useAuth } from "../contexts/AuthContext"; // ✅ import Auth context
 
 
-const NavBar = () => {
+const Navbar = () => {
   const { user } = useAuth(); // ✅ get current user
   const navigate = useNavigate();
 
@@ -64,4 +64,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;
