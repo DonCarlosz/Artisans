@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrench, Scissors, Home, CardSim, FileEdit } from "lucide-react";
+import { Wrench, Scissors, Home} from "lucide-react";
 import ServiceCard from "./ServiceCard";
 
 
